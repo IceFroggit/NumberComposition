@@ -1,4 +1,4 @@
-package IceFroggit.composition.domain.entity
+package icefroggit.composition.domain.entity
 
 data class Question(
     val sum: Int,

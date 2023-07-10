@@ -1,7 +1,7 @@
-package IceFroggit.composition.domain.usecases
+package icefroggit.composition.domain.usecases
 
-import IceFroggit.composition.domain.entity.Question
-import IceFroggit.composition.domain.repository.GameRepository
+import icefroggit.composition.domain.entity.Question
+import icefroggit.composition.domain.repository.GameRepository
 
 class GenerateQuestionUseCase(private val repository: GameRepository) {
     operator fun invoke(maxSumValue: Int): Question {

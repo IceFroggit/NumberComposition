@@ -1,9 +1,9 @@
-package IceFroggit.composition.data
+package icefroggit.composition.data
 
-import IceFroggit.composition.domain.entity.GameSettings
-import IceFroggit.composition.domain.entity.Level
-import IceFroggit.composition.domain.entity.Question
-import IceFroggit.composition.domain.repository.GameRepository
+import icefroggit.composition.domain.entity.GameSettings
+import icefroggit.composition.domain.entity.Level
+import icefroggit.composition.domain.entity.Question
+import icefroggit.composition.domain.repository.GameRepository
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random

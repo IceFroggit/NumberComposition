@@ -1,4 +1,4 @@
-package IceFroggit.composition
+package icefroggit.composition
 
 import org.junit.Test
 
