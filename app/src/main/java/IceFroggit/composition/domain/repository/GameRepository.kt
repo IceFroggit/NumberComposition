@@ -6,7 +6,7 @@ import IceFroggit.composition.domain.entity.Question
 
 interface GameRepository {
     fun generateQuestion(
-        masXumValue: Int,
+        maxSumValue: Int,
         countOfOptions: Int,
     ): Question
 
