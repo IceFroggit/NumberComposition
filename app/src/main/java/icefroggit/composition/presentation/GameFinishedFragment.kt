@@ -1,6 +1,7 @@
 package icefroggit.composition.presentation
 
 
+import IceFroggit.composition.R
 import IceFroggit.composition.databinding.FragmentGameFinishedBinding
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,15 +33,63 @@ class GameFinishedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupClickListeners()
+        bindViews()
+    }
+
+    private fun setupClickListeners() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 retryGame()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
-        binding.buttonRetry.setOnClickListener{
+        binding.buttonRetry.setOnClickListener {
             retryGame()
         }
+    }
+
+    private fun bindViews() {
+        val gameSettings = gameResult.gameSettings
+        with(binding) {
+            emojiResult.setImageResource(getSmileResId())
+            tvRequiredAnswers.text = String.format(
+                requireContext().resources.getString(R.string.required_score),
+                gameSettings.minCountOfRightAnswers.toString()
+            )
+            tvRequiredPercentage.text = String.format(
+                requireContext().resources.getString(R.string.required_percentage),
+                gameSettings.minPercentOfRightAnswers.toString()
+            )
+            tvScoreAnswers.text = String.format(
+                requireContext().resources.getString(R.string.score_answers),
+                gameResult.countOfRightAnswers.toString()
+            )
+            tvScorePercentage.text = String.format(
+                requireContext().resources.getString(R.string.score_percentage,
+                    getPercentOfRightAnswers()
+                )
+            )
+
+        }
+    }
+
+    private fun getPercentOfRightAnswers() = with(gameResult) {
+        if (countOfQuestions == 0) {
+            0
+        } else {
+            ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toString()
+        }
+
+
+    }
+
+    private fun getSmileResId(): Int {
+        return if (gameResult.winner)
+            R.drawable.ic_smile
+        else
+            R.drawable.ic_sad
+
     }
 
     override fun onDestroy() {
@@ -49,7 +98,7 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let{
+        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
             gameResult = it
         }
     }

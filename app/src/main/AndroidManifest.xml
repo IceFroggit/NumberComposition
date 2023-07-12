@@ -13,6 +13,7 @@
         android:theme="@style/Theme.NumberComposition"
         tools:targetApi="33">
         <activity
+            android:screenOrientation="portrait"
             android:name="icefroggit.composition.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
